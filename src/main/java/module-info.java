@@ -5,8 +5,8 @@ module com.github.lc.oss.commons.identity {
     requires com.github.lc.oss.commons.encoding;
     requires com.github.lc.oss.commons.signing;
 
-    requires org.apache.httpcomponents.httpclient;
-    requires org.apache.httpcomponents.httpcore;
+    requires transitive org.apache.httpcomponents.client5.httpclient5;
+    requires transitive org.apache.httpcomponents.core5.httpcore5;
 
     exports com.github.lc.oss.commons.identity;
     exports com.github.lc.oss.commons.identity.model;
