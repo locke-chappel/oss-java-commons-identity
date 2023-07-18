@@ -229,7 +229,10 @@ public abstract class AbstractIdentityService {
         }
     }
 
-    private boolean isAppTokenInvalid() {
+    /*
+     * Exposed for testing only
+     */
+    boolean isAppTokenInvalid() {
         if (this.applicationToken == null) {
             return true;
         }

@@ -288,6 +288,34 @@ public class AbstractIdentityServiceTest extends AbstractMockTest {
     }
 
     @Test
+    public void test_getApplicationToken_validThenExpired() {
+        AbstractIdentityService service = new TestService() {
+            private int callCount = 0;
+
+            @Override
+            protected boolean isAppTokenInvalid() {
+                if (this.callCount < 1) {
+                    this.callCount++;
+                    return true;
+                }
+                return false;
+            }
+        };
+        this.setField("jsonService", this.jsonService, service);
+        this.setField("httpService", this.httpService, service);
+
+        Token token1 = new Token(System.currentTimeMillis() - 100000, "token-value1");
+
+        this.setField("applicationToken", token1, service);
+
+        final String result1 = service.getApplicationToken();
+        Assertions.assertEquals(token1.getToken(), result1);
+
+        final String result2 = service.getApplicationToken();
+        Assertions.assertSame(result1, result2);
+    }
+
+    @Test
     public void test_getAppToken_threading() {
         AbstractIdentityService service = new TestService();
         this.setField("jsonService", this.jsonService, service);
