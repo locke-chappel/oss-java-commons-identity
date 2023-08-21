@@ -36,7 +36,7 @@ public abstract class AbstractIdentityService {
     private JsonService jsonService;
 
     private Token applicationToken;
-    private Object applicationTokenLock = new Object();
+    private final Object applicationTokenLock = new Object();
 
     public void init(JsonService jsonService) {
         this.init(jsonService, new InternalHttpService(jsonService));
