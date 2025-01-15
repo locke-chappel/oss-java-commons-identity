@@ -99,7 +99,7 @@ public class StringResponseHandlerTest extends AbstractMockTest {
 
         ApiResponse<?> apiResponse = new ApiResponse<>();
 
-        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_CONTENT);
         Mockito.when(response.getEntity()).thenReturn(entity);
         try {
             Mockito.when(entity.getContent()).thenReturn(stream);
@@ -115,7 +115,7 @@ public class StringResponseHandlerTest extends AbstractMockTest {
             Assertions.fail("Unexpected exception");
         } catch (HttpException ex) {
             Assertions.assertEquals("Error making request", ex.getMessage());
-            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_ENTITY, ex.getStatus());
+            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_CONTENT, ex.getStatus());
             Assertions.assertNull(ex.getMessages());
         }
     }
@@ -130,7 +130,7 @@ public class StringResponseHandlerTest extends AbstractMockTest {
         ApiResponse<?> apiResponse = new ApiResponse<>();
         apiResponse.setMessages(new ArrayList<>());
 
-        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_CONTENT);
         Mockito.when(response.getEntity()).thenReturn(entity);
         try {
             Mockito.when(entity.getContent()).thenReturn(stream);
@@ -146,7 +146,7 @@ public class StringResponseHandlerTest extends AbstractMockTest {
             Assertions.fail("Unexpected exception");
         } catch (HttpException ex) {
             Assertions.assertEquals("Error making request", ex.getMessage());
-            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_ENTITY, ex.getStatus());
+            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_CONTENT, ex.getStatus());
             Assertions.assertSame(apiResponse.getMessages(), ex.getMessages());
         }
     }
@@ -183,7 +183,7 @@ public class StringResponseHandlerTest extends AbstractMockTest {
         ClassicHttpResponse response = Mockito.mock(ClassicHttpResponse.class);
         HttpEntity entity = Mockito.mock(HttpEntity.class);
 
-        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        Mockito.when(response.getCode()).thenReturn(HttpStatus.SC_UNPROCESSABLE_CONTENT);
         Mockito.when(response.getEntity()).thenReturn(entity);
         try {
             Mockito.when(entity.getContent()).thenThrow(new IOException("BOOM!"));

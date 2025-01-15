@@ -196,7 +196,7 @@ public class InternalHttpServiceTest extends AbstractMockTest {
             Mockito.when(this.httpClient.execute( //
                     ArgumentMatchers.any(HttpUriRequestBase.class), //
                     ArgumentMatchers.any(AbstractHttpClientResponseHandler.class))). //
-                    thenThrow(new HttpException("Error making request", HttpStatus.SC_UNPROCESSABLE_ENTITY, null));
+                    thenThrow(new HttpException("Error making request", HttpStatus.SC_UNPROCESSABLE_CONTENT, null));
         } catch (IOException ex) {
             Assertions.fail("Unexpected exception");
         }
@@ -206,7 +206,7 @@ public class InternalHttpServiceTest extends AbstractMockTest {
             Assertions.fail("Expectex exception");
         } catch (HttpException ex) {
             Assertions.assertEquals("Error making request", ex.getMessage());
-            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_ENTITY, ex.getStatus());
+            Assertions.assertEquals(HttpStatus.SC_UNPROCESSABLE_CONTENT, ex.getStatus());
             Assertions.assertNull(ex.getMessages());
         }
     }
